@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-    <title>miles zane sterrett wrote a song</title>
+    <title>miles z sterrett wrote a song</title>
     <meta name="description" content="">
     <meta name="author" content="Miles Z. Sterrett">
 
@@ -13,29 +13,151 @@
     <link rel="stylesheet" type="text/css" media="all" href="css/reset.css" />
     <link rel="stylesheet" type="text/css" media="all" href="css/text.css" />
     <link rel="stylesheet" type="text/css" media="all" href="css/960.css">
+    <link rel="stylesheet" type="text/css" media="all" href="css/html5-boilerplate.css">
     <link rel="stylesheet" type="text/css" media="all" href="css/style.css">
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.jplayer.min.js"></script>
+
+<script type="text/javascript">
+//<![CDATA[
+
+$(document).ready(function(){
+
+	// Local copy of jQuery selectors, for performance.
+	var	my_jPlayer = $("#jquery_jplayer"),
+		trackName = $(".track-name"),
+		my_playState = $("#now-playing .play-state"),
+		my_extraPlayInfo = $("#now-playing .extra-play-info");
+
+	// Some options
+	var	opt_play_first = false, // If true, will attempt to auto-play the default track on page loads. No effect on mobile devices, like iOS.
+		opt_auto_play = true, // If true, when a track is selected, it will auto-play.
+		opt_text_playing = "Now playing: ", // Text when playing
+		opt_text_selected = "Paused: "; // Text when not playing
+
+	// A flag to capture the first track
+	var first_track = true;
+
+	// Change the time format
+	$.jPlayer.timeFormat.padMin = true;
+	$.jPlayer.timeFormat.padSec = true;
+	$.jPlayer.timeFormat.sepMin = ":";
+	$.jPlayer.timeFormat.sepSec = "";
+
+	// Initialize the play state text
+	my_playState.text(opt_text_selected);
+
+	// Instance jPlayer
+	my_jPlayer.jPlayer({
+		ready: function () {
+      my_jPlayer.jPlayer("setMedia", 
+        { 
+          mp3: "file:///Users/miles/code/mileszs-music/mp3s/my-soul-for-water.mp3",
+          oga: "file:///Users/miles/code/mileszs-music/mp3s/my-soul-for-water.ogg"
+        }
+      );
+		},
+		timeupdate: function(event) {
+			my_extraPlayInfo.text(parseInt(event.jPlayer.status.currentPercentAbsolute, 10) + "%");
+		},
+		play: function(event) {
+			my_playState.text(opt_text_playing);
+		},
+		pause: function(event) {
+			my_playState.text(opt_text_selected);
+		},
+		ended: function(event) {
+			my_playState.text(opt_text_selected);
+		},
+		swfPath: "/",
+		cssSelectorAncestor: "#jp_container",
+		supplied: "mp3,oga",
+		wmode: "window",
+    errorAlerts: true
+	});
+
+// Create click handlers for the different tracks
+	$("#jp_container .jp-play").click(function(e) {
+    $('#now-playing').show();
+		trackName.text($(this).attr('title'));
+
+    var thisTrack = $(this).attr("href");
+    var currTrack = my_jPlayer.data('jPlayer').status.src;
+    if (my_jPlayer.data("jPlayer").status.currentTime != '0' && thisTrack == currTrack) {
+      my_jPlayer.jPlayer("play");
+      return false;
+    }
+    my_jPlayer.jPlayer("setMedia", 
+      { 
+        mp3: "file:///Users/miles/code/mileszs-music/mp3s/my-soul-for-water.mp3",
+        oga: "file:///Users/miles/code/mileszs-music/mp3s/my-soul-for-water.ogg"
+      }
+    );
+    // Firefox needs this, evidently
+    my_jPlayer.jPlayer("play");
+		if((opt_play_first && first_track) || (opt_auto_play && !first_track)) {
+			my_jPlayer.jPlayer("play");
+		}
+		first_track = false;
+		$(this).blur();
+    /* $(this).hide(); */
+    /* $(this).closest('a.jp-pause').show(); */
+		return false;
+	});
+
+});
+//]]>
+</script>
+    
   </head>
   <body>
+    <div id="jquery_jplayer"></div>
     <div id="header-border"></div>
+    <header>
+      <h1><a href="http://music.mileszs.com"><span class="box">miles z. sterrett</span></a></h1>
+      <p><span class="box">attempting to create music</span></p>
+      <p><span class="box">that doesn't send you running</span></p>
+      <p id="now-playing" style="display:none;">
+        <span class="box">  
+          <span class="play-state"></span>
+          <span class="track-name">nothing</span>
+        </span>
+      </div>
+    </header>
     <div id="container" class="container_12">
-      <header class="grid_8 prefix_2 suffix_2">
-        <nav><ul></ul></nav>
-        <h1><a href="http://music.mileszs.com">Miles Zane Sterrett</a></h1>
-      </header>
-      <section role="main" class="grid_8 prefix_2 suffix_2">
-        <p id="intro">I believe the most effective method for improving one's abilities in a certain area is to use them. So, instead of wishing I were better at writing songs, or better at recording them, or better at performing them, I'm going to actually do those things, and post them here. If you listen, I would appreciate it if you <a href="mailto:miles@mileszs.com">emailed me your thoughts</a>.</p>
+      <section role="main" class="grid_10 prefix_1 suffix_1">
+        <p id="intro"><img src="img/me-instruments.jpg" />I believe the most effective method for improving one's abilities in a certain area is to use them. For instance, I am really good at rambling on incessantly, because I am always rambling on incessantly. So, instead of wishing I were better at writing songs, or better at recording songs, or better at performing songs, I'm going to actually do those things, and post the songs here. If you listen, I would appreciate it if you <a href="mailto:miles@mileszs.com">emailed me your thoughts</a>.</p>
         <ul>
-          <li>
-            My Soul for Water
-            <br />
-            <audio controls="controls">
-              <source src="mp3s/my-soul-for-water.mp3" type="audio/mpeg3">
-              <source src="mp3s/my-soul-for-water.ogg" type="audio/ogg">
-            </audio>
-            <br />
+          <li class="song">
+            <div id="jp_container" class="demo-container">
+              <ul>
+                <li class="jp-control play-holder">
+                  <a class="jp-play" href="file:///Users/miles/code/mileszs-music/mp3s/my-soul-for-water.mp3" title="My Soul for Water">▶</a>
+                  <a class="jp-pause" href="#">||</a>
+                </li>
+                <li class="jp-control stop-holder"><a class="jp-stop" href="#">■</a></li>
+              </ul>
+              <p id="jp-time" style="clear:both;">
+                <span class="jp-current-time"></span> / <span class="jp-duration"></span>
+              </p>
+            </div>
+            <div id="song-description">
+              <h3>My Soul for Water</h3>
+              <p>
+                Not my first shot at writing a song ever, but my first shot at
+                recording a "full song" by myself. I use my acoustic guitar, my
+                bass, and my voice. I think "voice" is the instrument in need
+                of the most practice, unfortunately. By the way, the percussive
+                sounds were created by either banging on the body, or raking
+                the strings, of my acoustic.
+              </p>
+            </div>
           </li>
         </ul>
       </section>
+
+      
       <div class="clear">&nbsp;</div>
       <footer>
         <p>&copy; Miles Zane Sterrett. All Rights Reserved, and all that jazz.</p>
