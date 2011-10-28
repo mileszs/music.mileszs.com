@@ -22,7 +22,7 @@ a:hover {
 }
 
 #header-border {
-  border-top: 4px solid #3b8c8a;
+  border-top: 8px solid #3b8c8a;
   position: fixed;
   top: 0;
   left: 0;
@@ -67,8 +67,8 @@ section p#intro {
   background: #000;
   text-align: left;
   padding: 20px;
+  padding-top: 60px;
   margin: 0 auto 20px auto;
-  width: 800px;
   border-radius: 0 0 10px 10px;
 }
 
@@ -79,6 +79,7 @@ section p img {
 
 section ul {
   list-style-type: none;
+  margin: 0 auto;
 }
 
 section ul li.song {
