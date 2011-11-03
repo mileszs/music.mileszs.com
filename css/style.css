@@ -44,7 +44,7 @@ header h1 {
   font-weight: bold;
 }
 
-header span.box {
+span.box {
   padding: 4px;
   color: #fff;
   background-color: #000;
@@ -61,6 +61,11 @@ header p {
   font-size: 20px;
   width: 300px;
   margin-bottom: 15px;
+}
+
+section {
+  width: 620px;
+  margin: 0 auto;
 }
 
 section p#intro {
@@ -104,7 +109,8 @@ footer p {
 }
 
 #now-playing {
-  margin-top: 40px;
+  float:left;
+  margin: 6px 0 0 10px;
 }
 
 #now-playing .play-state {
@@ -112,9 +118,33 @@ footer p {
 }
 
 #jp_container {
+  width: 500px;
+  margin: 0;
+}
+
+#jp_container li.jp-control {
   padding: 0;
   margin: 0;
   float:left;
+  width: 30px;
+  text-align: center;
+  height: 36px;
+}
+
+#jp_container li.play-holder.jp-control {
+  padding-top: 6px;
+}
+
+#jp_container a.jp-play {
+  font-size: 24px;
+}
+
+#jp_container a.jp-pause {
+  font-size: 24px;
+}
+
+#jp_container a.jp-stop {
+  font-size: 42px;
 }
 
 #song-description {
@@ -135,23 +165,12 @@ footer p {
   margin: 30px 0 0 0;
 }
 
-p#jp-time {
+li#jp-time {
   font-size: 16px;
-  margin-top: -60px;
   text-align: center;
-}
-
-li.jp-control {
-  padding: 0;
-  margin: 0;
+  width: 100px;
   float:left;
-  width: 60px;
-  text-align: center;
-  height: 52px;
-}
-
-li.play-holder.jp-control {
-  padding-top: 12px;
+  padding-top: 6px;
 }
 
 li.jp-control a {
@@ -172,14 +191,39 @@ li.jp-control a:active {
   text-shadow: 0 0 3px #fff;
 }
 
-a.jp-play {
-  font-size: 48px;
+#play-container {
+  float:left;
+  margin: 54px 0 0 48px;
+  height: 47px;
 }
 
-a.jp-pause {
-  font-size: 54px;
+a.song-play {
+  font-size: 72px;
 }
 
-a.jp-stop {
-  font-size: 86px;
+@media screen and (max-width:1280px) and (min-width:701px) {
+  section {
+    margin-left: 340px;
+  }
+}
+
+@media screen and (max-width:700px) {
+  header {
+    position: relative;
+    margin: 20px auto;
+    width: 340px;
+  }
+  section {
+    width: 340px;
+    margin: 0 auto;
+  }
+  section p#intro {
+    border-radius: 10px;
+  }
+  #jp_container {
+    width: 480px;
+  }
+  footer {
+    width: 480px;
+  }
 }
